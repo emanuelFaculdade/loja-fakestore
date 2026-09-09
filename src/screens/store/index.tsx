@@ -27,6 +27,7 @@ interface Product {
   title: string;
   price: number;
   category: string;
+  description: string;
   image: string;
   rating: {
     rate: number;
@@ -34,7 +35,11 @@ interface Product {
   };
 }
 
-export function Store() {
+interface StoreProps {
+  onOpenDetail: (product: Product) => void;
+}
+
+export function Store({ onOpenDetail }: StoreProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>(["Todos"]);
   const [loading, setLoading] = useState(true);
@@ -142,7 +147,7 @@ export function Store() {
           const imageSource = { uri: item.image };
 
           return (
-            <ProductCard onPress={() => handleOpenProduct(item)}>
+            <ProductCard onPress={() => onOpenDetail(item)}>
               <ProductImage source={imageSource} resizeMode="cover" />
 
               <ProductInfo>
