@@ -37,9 +37,10 @@ interface Product {
 
 interface StoreProps {
   onOpenDetail: (product: Product) => void;
+  onOpenCart: () => void;
 }
 
-export function Store({ onOpenDetail }: StoreProps) {
+export function Store({ onOpenDetail, onOpenCart }: StoreProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>(["Todos"]);
   const [loading, setLoading] = useState(true);
@@ -176,7 +177,7 @@ export function Store({ onOpenDetail }: StoreProps) {
           <BottomBarLabel active={false}>Buscar</BottomBarLabel>
         </BottomBarButton>
 
-        <BottomBarButton>
+        <BottomBarButton onPress={onOpenCart}>
           <BottomBarLabel active={false}>Carrinho</BottomBarLabel>
         </BottomBarButton>
 
